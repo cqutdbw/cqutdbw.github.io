@@ -15,13 +15,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="从JDK1.2版本开始，把对象的引用分为四种级别，从而使程序能更加灵活的控制对象的生命周期。这四种级别由高到低依次为：强引用、软引用、弱引用和虚引用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强引用、弱引用、软引用、虚引用">
+<meta property="og:url" content="http://yoursite.com/2017/05/09/强引用、弱引用、软引用、虚引用/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:updated_time" content="2017-05-09T12:38:55.000Z">
+<meta property="og:description" content="从JDK1.2版本开始，把对象的引用分为四种级别，从而使程序能更加灵活的控制对象的生命周期。这四种级别由高到低依次为：强引用、软引用、弱引用和虚引用。">
+<meta property="og:updated_time" content="2017-05-09T12:52:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="强引用、弱引用、软引用、虚引用">
+<meta name="twitter:description" content="从JDK1.2版本开始，把对象的引用分为四种级别，从而使程序能更加灵活的控制对象的生命周期。这四种级别由高到低依次为：强引用、软引用、弱引用和虚引用。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -53,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>tags | Hexo</title>
+<title>强引用、弱引用、软引用、虚引用 | Hexo</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -63,7 +66,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -253,11 +256,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-强引用、弱引用、软引用、虚引用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/tags/index.html" class="article-date">
-      <time datetime="2017-05-09T10:49:29.000Z" itemprop="datePublished">2017-05-09</time>
+      <a href="/2017/05/09/强引用、弱引用、软引用、虚引用/" class="article-date">
+      <time datetime="2017-05-09T12:49:33.000Z" itemprop="datePublished">2017-05-09</time>
 </a>
 
 
@@ -272,7 +275,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      tags
+      强引用、弱引用、软引用、虚引用
     </h1>
   
 
@@ -289,96 +292,89 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta { display: none; }
-    #container .article .article-title { padding-right: 0; }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover { border-left: none; }
-    .article-title { font-size: 1.6em }
-    .article-entry hr { margin: 0;}
-    .article-meta,
-    #container .article-info-post.article-info { display: none;}
-    #container .article .article-title { padding: 0; }
-</style>
+        <p>从JDK1.2版本开始，把对象的引用分为四种级别，从而使程序能更加灵活的控制对象的生命周期。这四种级别由高到低依次为：强引用、软引用、弱引用和虚引用。</p>
+<a id="more"></a>
+<blockquote>
+<p>从JDK1.2版本开始，把对象的引用分为四种级别，从而使程序能更加灵活的控制对象的生命周期。这四种级别由高到低依次为：强引用、软引用、弱引用和虚引用。</p>
+</blockquote>
+<p> 1 . 强引用(StrongReference) </p>
+<p> 强引用是使用最普遍的引用。如果一个对象具有强引用，那垃圾回收器绝不会回收它。当内存空间不足，Java虚拟机宁愿抛出OutOfMemoryError错误，使程序异常终止，也不会靠随意回收具有强引用的对象来解决内存不足的问题。如代码String s=”abc”中变量s就是字符串对象”abc”的一个强引用。只要你给强引用对象s赋空值null,该对象就可以被垃圾回收器回收。因为该对象此时不再含有其他强引用。 </p>
+<p> 2 . 弱引用(WeakReference) </p>
+<pre><code>弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象（s），不管当前内存空间足够与否，都会回收它的内存。不过，由于垃圾回收器是一个优先级很低的线程，因此不一定会很快发现那些只具有弱引用的对象，弱引用非常适合存储元数据。另一个使用弱引用的例子是WeakHashMap，它是除HashMap和TreeMap之外，Map接口的另一种实现。WeakHashMap有一个特点：map中的键值(keys)都被封装成弱引用，也就是说一旦强引用被删除，WeakHashMap内部的弱引用就无法阻止该对象被垃圾回收器回收。
 
+如下代码创建弱引用：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Counter counter = new Counter(); // strong reference - line 1</div><div class="line">WeakReference&lt;Counter&gt; weakCounter = new WeakReference&lt;Counter&gt;(counter); //weak reference</div><div class="line">counter = null; // now Counter object is eligible for garbage collection</div></pre></td></tr></table></figure>
+<p> 3 . 软引用(SoftReference)</p>
+<pre><code>如果一个对象（如 s）只具有软引用，则内存空间足够，垃圾回收器就不会回收它；如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。软引用可用来实现内存敏感的高速缓存。
 
-    <!-- Tag Cloud Page -->
-    <hr>
-<br>
-<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">1</span></li></ul>
-
-<p class="count"></p>
-
-<div class="tags">
-    
-</div>
-<style>
-    .category-list li{
-        display: inline-block;
-        margin: 0 1em .5em 0;
-        padding: 4px;
-        border: 1px solid lightgray;
-        font-size: 1.2rem;
-    }
-    .category-list a { color: gray; }
-    .category-list-item:hover a {
-        color: gray;
-        text-decoration: none;
-    }
-    .category-list-count {
-        margin-left: 2px;
-        font-size: .9rem;
-    }
-    .article-entry ul li:before{ display: none; }
-    .article-inner { text-align: center; }
-    .tags {
-        max-width: 42em;
-        margin: 2em auto;
-        margin-top: 0em;
-    }
-    .tags a {
-        margin-right: 1em;
-        line-height: 65px;
-        border-bottom: 1px solid gray;
-        white-space: nowrap;
-        transition: border-bottom .5s;
-    }
-    .tags a:hover {
-        border-bottom: 3px dotted gray;
-        text-decoration: none;
-    }
-    #count > span {
-        margin: auto .2em;
-        font-weight: bold;
-    }
-</style>
-
-<!-- Count tags and categories -->
-<p id="count">
-        已有<span><script>document.write($(".category-list-item").length)</script></span>个分类，
-        共计<span><script>document.write($(".tags > a").length)</script></span>个标签
-</p>
-<script>
-    $('#count').appendTo('.count');
-</script>
-
-          
-        
+可以使用如下代码创建软引用： 
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Counter prime = new Counter(); // prime holds a strong reference </div><div class="line">SoftReference soft = new SoftReference(prime) ; //soft reference variable has SoftReference to Counter Object created at line 2</div><div class="line"> </div><div class="line">prime = null; // now Counter object is eligible for garbage collection but only be collected when JVM absolutely needs memory</div></pre></td></tr></table></figure>
+<p> 4 . 虚引用(PhantomReference) </p>
+<p> “虚引用”顾名思义，就是形同虚设，与其他几种引用都不同，虚引用并不会决定对象的生命周期。如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收器回收。<br>虚引用主要用来跟踪对象被垃圾回收器回收的活动。虚引用与软引用和弱引用的一个区别在于：虚引用 <strong>必须</strong> 和引用队列 （ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引用，就会在回收对象的内存之前，把这个虚引用加入到与之 关联的引用队列中。</p>
+<p>如下代码创建虚引用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DigitalCounter digit = new DigitalCounter(); // digit reference variable has strong reference – line 3</div><div class="line">PhantomReference phantom = new PhantomReference(digit); // phantom reference to object created at line 3</div><div class="line"> </div><div class="line">digit = null;</div></pre></td></tr></table></figure>
+<p> 弱引用、软引用<strong>可以和</strong>一个引用队列（ReferenceQueue）联合使用，如果其所引用的对象被垃圾回收，Java虚拟机就会把这个弱引用加入到与之关联的引用队列中。  </p>
+<p>在创建任何弱引用、软引用和虚引用的过程中你可以通过如下代码提供引用队列ReferenceQueue。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ReferenceQueue refQueue = new ReferenceQueue(); //reference will be stored in this queue for cleanup</div><div class="line">DigitalCounter digit = new DigitalCounter();</div><div class="line">PhantomReference&lt;DigitalCounter&gt; phantom = new PhantomReference&lt;DigitalCounter&gt;(digit, refQueue);</div></pre></td></tr></table></figure>
       
     </div>
     
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/05/09/强引用、弱引用、软引用、虚引用/">强引用、弱引用、软引用、虚引用</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">帮文</a></p>
+        <p><span>发布时间:</span>2017-05-09, 20:49:33</p>
+        <p><span>最后更新:</span>2017-05-09, 20:52:43</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/09/强引用、弱引用、软引用、虚引用/" title="强引用、弱引用、软引用、虚引用">http://yoursite.com/2017/05/09/强引用、弱引用、软引用、虚引用/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/05/09/强引用、弱引用、软引用、虚引用/　　作者: 帮文" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/05/09/String、StringBuffer、StringBuilder区别与联系/">
+                    String、StringBuffer、StringBuilder区别与联系
+                </a>
+            </div>
+        
+    </nav>
 
   
 </article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
 
@@ -396,7 +392,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"tags　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"强引用、弱引用、软引用、虚引用　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -411,6 +407,24 @@
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/05/09/String、StringBuffer、StringBuilder区别与联系/" title="下一篇: String、StringBuffer、StringBuilder区别与联系">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/09/强引用、弱引用、软引用、虚引用/">强引用、弱引用、软引用、虚引用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/09/String、StringBuffer、StringBuilder区别与联系/">String、StringBuffer、StringBuilder区别与联系</a></li></ul>
 
 
 
